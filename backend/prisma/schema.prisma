@@ -17,4 +17,13 @@ model Level {
   id    String @id @unique @default(uuid())
   level Int    @unique
   name  String @unique
+  // Coordinates for object 1
+  obj1X Float?
+  obj1Y Float?
+  // Coordinates for object 2
+  obj2X Float?
+  obj2Y Float?
+  // Coordinates for object 3
+  obj3X Float?
+  obj3Y Float?
 }
