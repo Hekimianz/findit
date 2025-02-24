@@ -44,7 +44,7 @@ exports.addToLeaderboard = async (req, res) => {
 exports.getLeaderboard = async (req, res) => {
   try {
     const { id } = req.params;
-    const leaderboard = prisma.leaderboard.findMany({
+    const leaderboard = await prisma.leaderboard.findMany({
       where: { levelId: id },
     });
     res.status(200).json({ leaderboard });
