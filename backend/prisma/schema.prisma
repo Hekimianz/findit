@@ -14,16 +14,19 @@ datasource db {
 }
 
 model Level {
-  id    String @id @unique @default(uuid())
-  level Int    @unique
-  name  String @unique
+  id       String @id @unique @default(uuid())
+  level    Int    @unique
+  name     String @unique
+  obj1Name String
+  obj2Name String
+  obj3Name String
   // Coordinates for object 1
-  obj1X Float?
-  obj1Y Float?
+  obj1X    Float
+  obj1Y    Float
   // Coordinates for object 2
-  obj2X Float?
-  obj2Y Float?
+  obj2X    Float
+  obj2Y    Float
   // Coordinates for object 3
-  obj3X Float?
-  obj3Y Float?
+  obj3X    Float
+  obj3Y    Float
 }
