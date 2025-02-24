@@ -75,7 +75,7 @@ function Level() {
 
     const xPercent = clickX / rect.width;
     const yPercent = clickY / rect.height;
-
+    console.log("x:", xPercent, "y:", yPercent);
     const selectorWidth = 140;
     const selectorHeight = 204;
     const padding = 50;
@@ -196,7 +196,7 @@ function Level() {
           >
             <img src={`/levels/${level.level}/obj1.png`} alt="object" />
             <h3 className={foundTargets.includes(1) ? styles.found : ""}>
-              Cigarette
+              {level.obj1Name}
             </h3>
           </div>
           <div
@@ -206,7 +206,7 @@ function Level() {
           >
             <img src={`/levels/${level.level}/obj2.png`} alt="object" />
             <h3 className={foundTargets.includes(2) ? styles.found : ""}>
-              Lucy
+              {level.obj2Name}
             </h3>
           </div>
           <div
@@ -216,7 +216,7 @@ function Level() {
           >
             <img src={`/levels/${level.level}/obj3.png`} alt="object" />
             <h3 className={foundTargets.includes(3) ? styles.found : ""}>
-              Tomb
+              {level.obj3Name}
             </h3>
           </div>
         </div>

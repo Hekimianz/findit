@@ -20,6 +20,8 @@
 .level__card img {
   transition: 0.8s all ease;
   width: 100%;
+  height: 100%;
+  max-height: 478px;
   max-width: 500px;
   border-radius: 5px;
 }
