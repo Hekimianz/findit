@@ -1,25 +1,20 @@
 import { useState, useEffect } from "react";
 import LevelPicker from "../../components/levelPicker/LevelPicker";
+import { getLevels } from "../../api/api";
 import styles from "./Home.module.css";
 function Home() {
   const [levels, setLevels] = useState([]);
   useEffect(() => {
     const fetchLevels = async () => {
       try {
-        const response = await fetch("http://localhost:3000/levels");
-        if (!response.ok) {
-          console.error("Error fetching levels", response.status);
-          return;
-        }
-        const data = await response.json();
-        console.log(data.levels);
+        const data = await getLevels();
         setLevels(data.levels);
       } catch (err) {
         console.error("error fetching levels");
         throw err;
       }
     };
-    setLevels(fetchLevels());
+    fetchLevels();
   }, []);
   return (
     <section className={styles.main__cont}>
@@ -31,7 +26,12 @@ function Home() {
       <section className={styles.levelPicker__cont}>
         {levels.length > 0 &&
           levels.map((level) => (
-            <LevelPicker key={level.id} name={level.name} level={level.level} />
+            <LevelPicker
+              key={level.id}
+              name={level.name}
+              level={level.level}
+              id={level.id}
+            />
           ))}
       </section>
     </section>

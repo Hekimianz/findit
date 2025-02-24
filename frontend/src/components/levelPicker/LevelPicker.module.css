@@ -10,9 +10,11 @@
   padding: 1.5rem 2rem;
   gap: 10px;
   background-color: var(--light-blue);
-  transition: 0.2s all ease, 0.8s font-size;
+  transition: 0.4s all ease, 0.8s font-size;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   font-size: 1.2rem;
+  color: var(--off-white);
+  text-decoration: none;
 }
 
 .level__card img {
