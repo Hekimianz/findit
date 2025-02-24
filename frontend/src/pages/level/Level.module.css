@@ -183,6 +183,21 @@ a {
   box-shadow: none;
 }
 
+.winCont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.winCont h2 {
+  font-size: 1.8rem;
+}
+
+.winCont p {
+  font-size: 1.2rem;
+}
+
 @keyframes rotate {
   0% {
     transform: rotate(0deg);

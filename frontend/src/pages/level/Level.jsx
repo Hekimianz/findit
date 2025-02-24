@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Confetti from "react-confetti";
 import { getLevels } from "../../api/api";
 import styles from "./Level.module.css";
 
@@ -16,6 +17,8 @@ function Level() {
   const [intervalId, setIntervalId] = useState(null);
   const [correctAudio] = useState(new Audio("/correct.mp3"));
   const [wrongAudio] = useState(new Audio("/wrong.mp3"));
+  const [winAudio] = useState(new Audio("/win.mp3"));
+  const [gameEnded, setGameEnded] = useState(false);
 
   useEffect(() => {
     const fetchLevel = async (id) => {
@@ -54,6 +57,8 @@ function Level() {
     if (foundTargets.length === targetCoords.length && intervalId) {
       clearInterval(intervalId);
       setIntervalId(null);
+      setGameEnded(true);
+      winAudio.play();
     }
   }, [foundTargets]);
 
@@ -140,7 +145,7 @@ function Level() {
           </button>
         </div>
       )}
-      {levelStarted && !loading && (
+      {levelStarted && !loading && !gameEnded && (
         <div className={styles.image__cont}>
           <div className={styles.timer}>{formatTime(timer)}</div>
           <div className={styles.previews}>
@@ -215,6 +220,18 @@ function Level() {
             </h3>
           </div>
         </div>
+      )}
+      {gameEnded && !loading && (
+        <section className={styles.winCont}>
+          <Confetti />
+          <h2>Good job!</h2>
+          <p>
+            You finished {level.name} in {formatTime(timer)}!
+          </p>
+          <Link to="/" className={styles.button}>
+            Continue
+          </Link>
+        </section>
       )}
     </section>
   );
