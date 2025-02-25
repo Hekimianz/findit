@@ -191,13 +191,23 @@ a {
 }
 
 .winCont h2 {
-  font-size: 1.8rem;
+  font-size: 2rem;
 }
 
 .winCont p {
-  font-size: 1.2rem;
+  font-size: 1.6rem;
 }
 
+.input {
+  background-color: var(--light-blue);
+  border: 1px solid var(--yellow);
+  border-radius: 4px;
+  padding: 4px;
+  margin-left: 5px;
+  width: 80px;
+  text-align: center;
+  color: var(--off-white);
+}
 @keyframes rotate {
   0% {
     transform: rotate(0deg);

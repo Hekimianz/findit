@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Confetti from "react-confetti";
-import { getLevels } from "../../api/api";
+import { getLevels, addToLeaderboard } from "../../api/api";
 import styles from "./Level.module.css";
 
 function Level() {
@@ -19,6 +19,7 @@ function Level() {
   const [wrongAudio] = useState(new Audio("/wrong.mp3"));
   const [winAudio] = useState(new Audio("/win.mp3"));
   const [gameEnded, setGameEnded] = useState(false);
+  const [name, setName] = useState("");
 
   useEffect(() => {
     const fetchLevel = async (id) => {
@@ -228,7 +229,23 @@ function Level() {
           <p>
             You finished {level.name} in {formatTime(timer)}!
           </p>
-          <Link to="/" className={styles.button}>
+          <p>
+            Enter your name for the leaderboards:{" "}
+            <input
+              type="text"
+              className={styles.input}
+              placeholder="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </p>
+          <Link
+            to={`/leaderboard/${id}`}
+            className={styles.button}
+            onClick={async () => {
+              await addToLeaderboard(id, name, formatTime(timer));
+            }}
+          >
             Continue
           </Link>
         </section>

@@ -25,4 +25,42 @@ const getLevels = async (id = "") => {
   }
 };
 
-export { getLevels };
+const getLeaderboard = async (id) => {
+  try {
+    const response = await fetch(`${base_url}/levels/leaderboard/${id}`);
+    if (!response.ok) {
+      console.error("Error fetching leaderboard: HTTP " + response.status);
+      return null;
+    }
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.error("Error fetching leaderboard data:", err.message);
+    return null;
+  }
+};
+
+const addToLeaderboard = async (id, name, time) => {
+  try {
+    const response = await fetch(`${base_url}/levels/leaderboard/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, time }),
+    });
+
+    if (!response.ok) {
+      console.error(`Error posting leaderboard: HTTP ${response.status}`);
+      return null;
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.error("Error posting leaderboard data:", err.message);
+    return null;
+  }
+};
+
+export { getLevels, getLeaderboard, addToLeaderboard };
