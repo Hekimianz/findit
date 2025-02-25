@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Confetti from "react-confetti";
 import { getLevels, addToLeaderboard } from "../../api/api";
@@ -20,6 +20,7 @@ function Level() {
   const [winAudio] = useState(new Audio("/win.mp3"));
   const [gameEnded, setGameEnded] = useState(false);
   const [name, setName] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchLevel = async (id) => {
@@ -120,6 +121,18 @@ function Level() {
       return;
     }
     wrongAudio.play();
+  };
+
+  const handleSubmitScore = async (e) => {
+    e.preventDefault();
+    if (name.length >= 1) {
+      try {
+        await addToLeaderboard(id, name, formatTime(timer));
+        navigate(`/leaderboard/${id}`);
+      } catch (err) {
+        console.error("Error adding to leaderboard:", error);
+      }
+    }
   };
 
   return (
@@ -239,18 +252,13 @@ function Level() {
               onChange={(e) => setName(e.target.value)}
             />
           </p>
-          <Link
-            to={`/leaderboard/${id}`}
+          <button
             className={styles.button}
-            disabled={name.length >= 1}
-            onClick={async () => {
-              if (name.length >= 1) {
-                await addToLeaderboard(id, name, formatTime(timer));
-              }
-            }}
+            disabled={name.length < 1}
+            onClick={handleSubmitScore}
           >
             Continue
-          </Link>
+          </button>
         </section>
       )}
     </section>
