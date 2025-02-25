@@ -242,8 +242,11 @@ function Level() {
           <Link
             to={`/leaderboard/${id}`}
             className={styles.button}
+            disabled={name.length >= 1}
             onClick={async () => {
-              await addToLeaderboard(id, name, formatTime(timer));
+              if (name.length >= 1) {
+                await addToLeaderboard(id, name, formatTime(timer));
+              }
             }}
           >
             Continue
