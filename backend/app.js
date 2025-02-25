@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://findit-hek.netlify.app",
+    origin: ["https://findit-hek.netlify.app", "http://localhost:5173"],
   })
 );
 
